@@ -1,4 +1,4 @@
-OneSettings = { name = "OneSettings", version = "26.11.1", modules = {} }
+OneSettings = { name = "OneSettings", version = "26.11.2", modules = {} }
 local OS = OneSettings
 
 function OS.Copy(value)

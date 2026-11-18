@@ -8,7 +8,9 @@ function Settings:Initialize()
         for system, entries in pairs(systems) do
             if type(system) == "number" and system ~= SETTING_TYPE_CUSTOM and system ~= SETTING_TYPE_ACCOUNT then
                 for id, data in pairs(entries) do
-                    if type(id) == "number" and data.system == system and not IsSettingDeferred(system, id) then
+                    -- Language belongs to the client; a reload after /script SetCVar must keep it.
+                    local isLanguage = system == SETTING_TYPE_UI and id == UI_SETTING_TEXT_LANGUAGE
+                    if type(id) == "number" and data.system == system and not isLanguage and not IsSettingDeferred(system, id) then
                         local exists = not KEYBOARD_OPTIONS or KEYBOARD_OPTIONS:DoesSettingExist(data)
                         if exists then
                             self.descriptors[system .. ":" .. id] = { system = system, id = id }
